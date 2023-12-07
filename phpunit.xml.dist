@@ -2,7 +2,7 @@
 	bootstrap="tests/bootstrap.php"
 	>
 	<testsuites>
-		<testsuite name="NeutronStandard">
+		<testsuite name="ModernWpcsStandard">
 			<directory>tests</directory>
 		</testsuite>
 	</testsuites>

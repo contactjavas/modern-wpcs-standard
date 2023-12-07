@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NeutronStandardTest;
+namespace ModernWpcsStandardTest;
 
 use PHPUnit\Framework\TestCase;
 
 class TypeHintSniffTest extends TestCase {
 	public function testTypeHintSniff() {
 		$fixtureFile = __DIR__ . '/FunctionsFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/Functions/TypeHintSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Functions/TypeHintSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -21,7 +21,7 @@ class TypeHintSniffTest extends TestCase {
 
 	public function testTypeHintSniffWithVariadicArgs() {
 		$fixtureFile = __DIR__ . '/VariadicArgumentsFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/Functions/TypeHintSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Functions/TypeHintSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -32,7 +32,7 @@ class TypeHintSniffTest extends TestCase {
 
 	public function testTypeHintSniffWithClosures() {
 		$fixtureFile = __DIR__ . '/ClosureFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/Functions/TypeHintSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Functions/TypeHintSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -45,7 +45,7 @@ class TypeHintSniffTest extends TestCase {
 
 	public function testTypeHintSniffWithInterface() {
 		$fixtureFile = __DIR__ . '/InterfaceFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/Functions/TypeHintSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Functions/TypeHintSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -56,7 +56,7 @@ class TypeHintSniffTest extends TestCase {
 
 	public function testTypeHintSniffWithAbstractClass() {
 		$fixtureFile = __DIR__ . '/AbstractClassFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/Functions/TypeHintSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Functions/TypeHintSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);

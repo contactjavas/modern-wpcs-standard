@@ -1,5 +1,5 @@
 {
-    "name": "automattic/phpcs-neutron-standard",
+    "name": "contactjavas/modern-wpcs-standard",
     "description": "A set of phpcs sniffs for modern php development.",
     "type": "phpcodesniffer-standard",
     "keywords" : [ "phpcs", "static analysis" ],
@@ -14,12 +14,12 @@
     "prefer-stable": true,
     "scripts": {
         "test": "./vendor/bin/phpunit --testdox",
-        "lint": "./vendor/bin/phpcs NeutronStandard"
+        "lint": "./vendor/bin/phpcs ModernWpcsStandard"
     },
     "support"    : {
-        "issues": "https://github.com/sirbrillig/phpcs-neutron-standard/issues",
-        "wiki"  : "https://github.com/sirbrillig/phpcs-neutron-standard/wiki",
-        "source": "https://github.com/sirbrillig/phpcs-neutron-standard"
+        "issues": "https://github.com/contactjavas/modern-wpcs-standard/issues",
+        "wiki"  : "https://github.com/contactjavas/modern-wpcs-standard/wiki",
+        "source": "https://github.com/contactjavas/modern-wpcs-standard"
     },
     "config": {
         "sort-order": true,
@@ -29,12 +29,12 @@
     },
     "autoload": {
         "psr-4": {
-            "NeutronStandard\\": "NeutronStandard/"
+            "ModernWpcsStandard\\": "ModernWpcsStandard/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NeutronStandard\\Tests\\": "tests/"
+            "ModernWpcsStandard\\Tests\\": "tests/"
         }
     },
     "require": {

@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NeutronStandardTest;
+namespace ModernWpcsStandardTest;
 
 use PHPUnit\Framework\TestCase;
 
 class RequireNewlineBetweenFunctionsSniffTest extends TestCase {
 	public function testRequireNewlineBetweenFunctionsSniff() {
 		$fixtureFile = __DIR__ . '/NewlinesBetweenFunctionsFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/Whitespace/RequireNewlineBetweenFunctionsSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Whitespace/RequireNewlineBetweenFunctionsSniff.php';
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
 		$phpcsFile->process();
@@ -19,7 +19,7 @@ class RequireNewlineBetweenFunctionsSniffTest extends TestCase {
 	public function testFixRequireNewlineBetweenFunctionsSniff() {
 		$fixtureFile = __DIR__ . '/NewlinesBetweenFunctionsFixture.php';
 		$fixedFixtureFile = __DIR__ . '/FixedNewlinesBetweenFunctionsFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/Whitespace/RequireNewlineBetweenFunctionsSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Whitespace/RequireNewlineBetweenFunctionsSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);

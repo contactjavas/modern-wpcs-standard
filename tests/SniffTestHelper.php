@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NeutronStandardTest;
+namespace ModernWpcsStandardTest;
 
 use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Ruleset;

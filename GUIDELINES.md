@@ -1,4 +1,4 @@
-# Neutron PHP Coding Guidelines
+# Modern WPCS Standard's Coding Guidelines
 
 The key words "MUST", "MUST NOT", "SHOULD", "SHOULD NOT", and "MAY" in this document are to be interpreted as described in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
 

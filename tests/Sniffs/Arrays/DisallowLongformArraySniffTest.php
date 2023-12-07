@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NeutronStandardTest;
+namespace ModernWpcsStandardTest;
 
 use PHPUnit\Framework\TestCase;
 
 class DisallowLongformArraySniffTest extends TestCase {
 	public function testDisallowLongformArraySniff() {
 		$fixtureFile = __DIR__ . '/ArraysFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/Arrays/DisallowLongformArraySniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Arrays/DisallowLongformArraySniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -20,7 +20,7 @@ class DisallowLongformArraySniffTest extends TestCase {
 	public function testFixDisallowLongFormArraySniff() {
 		$fixtureFile = __DIR__ . '/ArraysFixture.php';
 		$fixedFixtureFile = __DIR__ . '/FixedLongFormArrayFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/Arrays/DisallowLongformArraySniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Arrays/DisallowLongformArraySniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);

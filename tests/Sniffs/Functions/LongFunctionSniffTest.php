@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace NeutronStandardTest;
+namespace ModernWpcsStandardTest;
 
 use PHPUnit\Framework\TestCase;
 
@@ -10,7 +10,7 @@ class LongFunctionSniffTest extends TestCase {
 		$fixtureFile = __DIR__ . '/LongFunctionsFixture.php';
 		$sniffFile =
 			__DIR__ .
-			'/../../../NeutronStandard/Sniffs/Functions/LongFunctionSniff.php';
+			'/../../../ModernWpcsStandard/Sniffs/Functions/LongFunctionSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs(
@@ -26,7 +26,7 @@ class LongFunctionSniffTest extends TestCase {
 		$fixtureFile = __DIR__ . '/LongFunctionsFixture.php';
 		$sniffFile =
 			__DIR__ .
-			'/../../../NeutronStandard/Sniffs/Functions/LongFunctionSniff.php';
+			'/../../../ModernWpcsStandard/Sniffs/Functions/LongFunctionSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs(
@@ -34,7 +34,7 @@ class LongFunctionSniffTest extends TestCase {
 			$fixtureFile
 		);
 		$phpcsFile->ruleset->setSniffProperty(
-			'NeutronStandard\Sniffs\Functions\LongFunctionSniff',
+			'ModernWpcsStandard\Sniffs\Functions\LongFunctionSniff',
 			'maxFunctionLines',
 			'50'
 		);
@@ -48,7 +48,7 @@ class LongFunctionSniffTest extends TestCase {
 		$fixtureFile = __DIR__ . '/LongFunctionsFixture.php';
 		$sniffFile =
 			__DIR__ .
-			'/../../../NeutronStandard/Sniffs/Functions/LongFunctionSniff.php';
+			'/../../../ModernWpcsStandard/Sniffs/Functions/LongFunctionSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs(
@@ -56,7 +56,7 @@ class LongFunctionSniffTest extends TestCase {
 			$fixtureFile
 		);
 		$phpcsFile->ruleset->setSniffProperty(
-			'NeutronStandard\Sniffs\Functions\LongFunctionSniff',
+			'ModernWpcsStandard\Sniffs\Functions\LongFunctionSniff',
 			'maxFunctionLines',
 			'2'
 		);

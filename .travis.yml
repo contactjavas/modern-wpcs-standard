@@ -1,4 +1,4 @@
-# TravisCI configuration for Automattic/phpcs-neutron-standard
+# TravisCI configuration for contactjavas/modern-wpcs-standard
 
 if: "branch = master"
 

@@ -1,14 +1,14 @@
-# Neutron PHP Standard <a href="https://travis-ci.org/Automattic/phpcs-neutron-standard"><img src="https://img.shields.io/travis/Automattic/phpcs-neutron-standard/master.svg" alt="Build status" /></a>
+# Modern WPCS Standard <a href="https://travis-ci.org/contactjavas/modern-wpcs-standard"><img src="https://img.shields.io/travis/contactjavas/modern-wpcs-standard/master.svg" alt="Build status" /></a>
 
 > **Warning**
 >
-> **IMPORTANT NOTE:** This project is no longer actively developed. At Automattic we've switched to using the WordPress Coding Standards.
+> **IMPORTANT NOTE:** This project is no longer actively developed. At contactjavas we've switched to using the WordPress Coding Standards.
 
 -----
 
 These are a set of modern (PHP >7) linting guidelines meant to be applied in addition to the [the WordPress coding standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) for WordPress development. Because of the newer PHP version, it is not suitable for work on Core WordPress, but may be useful for those who are not bound by PHP 5.2.
 
-These guidelines are being developed primarily for a team within [Automattic](https://automattic.com/), but anyone is free to use them, suggest changes, or report bugs.
+These guidelines are being developed primarily for a team within [contactjavas](https://automattic.com/), but anyone is free to use them, suggest changes, or report bugs.
 
 This project is a [phpcs](https://github.com/squizlabs/PHP_CodeSniffer) "standard" (a collection of rules or "sniffs") that can be included in any project.
 
@@ -18,14 +18,14 @@ To use these rules in a project which is set up using [composer](https://href.li
 
 ```
 composer require --dev squizlabs/php_codesniffer dealerdirect/phpcodesniffer-composer-installer
-composer require --dev automattic/phpcs-neutron-standard
+composer require --dev automattic/modern-wpcs-standard
 ```
 
-If you want this standard, the WordPress standard, the VariableAnalysis standard, and other customizations, you can install the meta-standard [NeutronRuleset](https://github.com/Automattic/phpcs-neutron-ruleset) instead.
+If you want this standard, the WordPress standard, the VariableAnalysis standard, and other customizations, you can install the meta-standard [ModernWpcsRuleset](https://github.com/contactjavas/modern-wpcs-ruleset) instead.
 
 ```
 composer require --dev squizlabs/php_codesniffer dealerdirect/phpcodesniffer-composer-installer
-composer require --dev automattic/phpcs-neutron-ruleset
+composer require --dev automattic/modern-wpcs-ruleset
 ```
 
 ## Configuration
@@ -36,7 +36,7 @@ When installing sniff standards in a project, you edit a `phpcs.xml` file with t
 <?xml version="1.0"?>
 <ruleset name="MyStandard">
  <description>My library.</description>
- <rule ref="NeutronStandard"/>
+ <rule ref="ModernWpcsStandard"/>
 </ruleset>
 ```
 

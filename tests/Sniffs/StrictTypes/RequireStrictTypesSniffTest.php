@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NeutronStandardTest;
+namespace ModernWpcsStandardTest;
 
 use PHPUnit\Framework\TestCase;
 
 class RequireStrictTypesSniffTest extends TestCase {
 	public function testRequireStrictTypesIfMissing() {
 		$fixtureFile = __DIR__ . '/StrictTypesFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/StrictTypes/RequireStrictTypesSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/StrictTypes/RequireStrictTypesSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -19,7 +19,7 @@ class RequireStrictTypesSniffTest extends TestCase {
 
 	public function testRequireStrictTypesPassesIfPresentOnNewLine() {
 		$fixtureFile = __DIR__ . '/HasStrictTypesFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/StrictTypes/RequireStrictTypesSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/StrictTypes/RequireStrictTypesSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -30,7 +30,7 @@ class RequireStrictTypesSniffTest extends TestCase {
 
 	public function testRequireStrictTypesPassesIfPresentOnSameLine() {
 		$fixtureFile = __DIR__ . '/OneLineStrictTypesFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/StrictTypes/RequireStrictTypesSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/StrictTypes/RequireStrictTypesSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -41,7 +41,7 @@ class RequireStrictTypesSniffTest extends TestCase {
 
 	public function testRequireStrictTypesOnlyIncludesFirstOpenTag() {
 		$fixtureFile = __DIR__ . '/MultipleOpenTagsFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/StrictTypes/RequireStrictTypesSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/StrictTypes/RequireStrictTypesSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -52,7 +52,7 @@ class RequireStrictTypesSniffTest extends TestCase {
 
 	public function testRequireStrictTypesIgnoresInterfaceFiles() {
 		$fixtureFile = __DIR__ . '/InterfaceOnlyFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/StrictTypes/RequireStrictTypesSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/StrictTypes/RequireStrictTypesSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -63,7 +63,7 @@ class RequireStrictTypesSniffTest extends TestCase {
 
 	public function testRequireStrictTypesDoesNotIgnoreInterfaceAndClass() {
 		$fixtureFile = __DIR__ . '/InterfaceAndClassFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/StrictTypes/RequireStrictTypesSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/StrictTypes/RequireStrictTypesSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);

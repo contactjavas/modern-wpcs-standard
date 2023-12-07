@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NeutronStandardTest;
+namespace ModernWpcsStandardTest;
 
 use PHPUnit\Framework\TestCase;
 
 class DisallowGlobalFunctionsSniffTest extends TestCase {
 	public function testDisallowGlobalFunctionsSniff() {
 		$fixtureFile = __DIR__ . '/GlobalsFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/Globals/DisallowGlobalFunctionsSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Globals/DisallowGlobalFunctionsSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -19,7 +19,7 @@ class DisallowGlobalFunctionsSniffTest extends TestCase {
 
 	public function testDisallowGlobalFunctionsSniffAllowsNamespacedGlobals() {
 		$fixtureFile = __DIR__ . '/NamespacedGlobalFunctionsFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/Globals/DisallowGlobalFunctionsSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Globals/DisallowGlobalFunctionsSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);

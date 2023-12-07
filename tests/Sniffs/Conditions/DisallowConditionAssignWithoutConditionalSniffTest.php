@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NeutronStandardTest;
+namespace ModernWpcsStandardTest;
 
 use PHPUnit\Framework\TestCase;
 
 class DisallowConditionAssignWithoutConditionalSniffTest extends TestCase {
 	public function testDisallowConditionAssignWithoutConditionalSniff() {
 		$fixtureFile = __DIR__ . '/ConditionsFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/Conditions/DisallowConditionAssignWithoutConditionalSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Conditions/DisallowConditionAssignWithoutConditionalSniff.php';
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
 		$phpcsFile->process();

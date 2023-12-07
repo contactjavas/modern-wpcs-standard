@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace NeutronStandardTest;
+namespace ModernWpcsStandardTest;
 
 use PHPUnit\Framework\TestCase;
 
 class DisallowAssignAlignSniffTest extends TestCase {
 	public function testDisallowAlignedAssignments() {
 		$fixtureFile = __DIR__ . '/AlignedAssignmentsFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/AssignAlign/DisallowAssignAlignSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/AssignAlign/DisallowAssignAlignSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -19,7 +19,7 @@ class DisallowAssignAlignSniffTest extends TestCase {
 
 	public function testDisallowAlignedArrays() {
 		$fixtureFile = __DIR__ . '/AlignedArrayFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/AssignAlign/DisallowAssignAlignSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/AssignAlign/DisallowAssignAlignSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -30,7 +30,7 @@ class DisallowAssignAlignSniffTest extends TestCase {
 
 	public function testDisallowAlignedArguments() {
 		$fixtureFile = __DIR__ . '/AlignedArgumentsFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/AssignAlign/DisallowAssignAlignSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/AssignAlign/DisallowAssignAlignSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -42,7 +42,7 @@ class DisallowAssignAlignSniffTest extends TestCase {
 	public function testDisallowAlignedArgumentsFix() {
 		$fixtureFile = __DIR__ . '/AlignedArgumentsFixture.php';
 		$fixedFixtureFile = __DIR__ . '/FixedAlignedArgumentsFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/AssignAlign/DisallowAssignAlignSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/AssignAlign/DisallowAssignAlignSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -55,7 +55,7 @@ class DisallowAssignAlignSniffTest extends TestCase {
 	public function testDisallowAlignedAssignmentsFix() {
 		$fixtureFile = __DIR__ . '/AlignedAssignmentsFixture.php';
 		$fixedFixtureFile = __DIR__ . '/FixedAlignedAssignmentsFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/AssignAlign/DisallowAssignAlignSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/AssignAlign/DisallowAssignAlignSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
@@ -68,7 +68,7 @@ class DisallowAssignAlignSniffTest extends TestCase {
 	public function testDisallowAlignedArraysFix() {
 		$fixtureFile = __DIR__ . '/AlignedArrayFixture.php';
 		$fixedFixtureFile = __DIR__ . '/FixedAlignedArrayFixture.php';
-		$sniffFile = __DIR__ . '/../../../NeutronStandard/Sniffs/AssignAlign/DisallowAssignAlignSniff.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/AssignAlign/DisallowAssignAlignSniff.php';
 
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
