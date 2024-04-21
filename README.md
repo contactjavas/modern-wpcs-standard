@@ -2,11 +2,13 @@
 
 > **Warning**
 >
-> **IMPORTANT NOTE:** This project is no longer actively developed. At contactjavas we've switched to using the WordPress Coding Standards.
+> **IMPORTANT NOTE:** 
+> The *Neutron PHP Standard[https://github.com/Automattic/phpcs-neutron-standard]* is no longer actively developed.
+> This package is copy-and-modify version of the Neutron PHP Standard.
 
 -----
 
-These are a set of modern (PHP >7) linting guidelines meant to be applied in addition to the [the WordPress coding standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) for WordPress development. Because of the newer PHP version, it is not suitable for work on Core WordPress, but may be useful for those who are not bound by PHP 5.2.
+These are a set of modern (PHP >= 8) linting guidelines meant to be applied in addition to the [the WordPress coding standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) for WordPress development. Because of the newer PHP version, it is not suitable for work on Core WordPress, but may be useful for those who are not bound by PHP 5.2.
 
 These guidelines are being developed primarily for a team within [contactjavas](https://automattic.com/), but anyone is free to use them, suggest changes, or report bugs.
 
