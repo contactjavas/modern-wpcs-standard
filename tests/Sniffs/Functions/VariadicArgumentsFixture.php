@@ -1,7 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
-class MyClass {
+namespace ModernWpcsStandard\Tests\Sniffs\Functions;
+
+class VariadicArgumentsFixture {
+	public mixed $words;
+
 	public function saveWordsWithType(string ...$words) {
 		$this->words = $words;
 	}

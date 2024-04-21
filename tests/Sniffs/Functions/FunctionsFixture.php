@@ -1,5 +1,10 @@
 <?php
-abstract class MyClass {
+
+declare( strict_types=1 );
+
+namespace ModernWpcsStandard\Tests\Sniffs\Functions;
+
+abstract class FunctionsFixture {
 	public function notTooLong() {
 		/**
 		 * Lorem ipsum
@@ -143,8 +148,8 @@ abstract class MyClass {
 		$arg2;
 	}
 
-	public function hasHints(string $arg1): MyClass {
-		return new MyClass($arg1);
+	public function hasHints(string $arg1): FunctionsFixture {
+		return new FunctionsFixture($arg1);
 	}
 
 	public function hasHintsWithArray(array $arg1): array {
@@ -175,8 +180,8 @@ abstract class MyClass {
 		return $arg1;
 	}
 
-	public function hasHintsWithClass(MyClass $arg1): MyClass {
-		return new MyClass($arg1);
+	public function hasHintsWithClass(FunctionsFixture $arg1): FunctionsFixture {
+		return new FunctionsFixture($arg1);
 	}
 
 	public function hasVoidReturnAndNoHint() {
@@ -199,7 +204,7 @@ abstract class MyClass {
 		'anything';
 	}
 
-	public function hasIncorrectTypeHintSpacingThree(): void{
+	public function hasIncorrectTypeHintSpacingThree(): void {
 		'other thing';
 	}
 
@@ -214,8 +219,8 @@ abstract class MyClass {
 	}
 
 	// Test yield as a vaild return token
-	public function iteratorYield( \Iterator $iterator ): \Iterator {
-		foreach( $iterator as $i ) {
+	public function iteratorYield(\Iterator $iterator): \Iterator {
+		foreach ( $iterator as $i) {
 			yield $i;
 		}
 	}

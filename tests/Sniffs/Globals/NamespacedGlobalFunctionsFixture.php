@@ -1,11 +1,14 @@
 <?php
-namespace Foo\Bar;
+
+declare(strict_types=1);
+
+namespace ModernWpcsStandard\Tests\Sniffs\Globals;
 
 function test() {
 	define("FOO", "bar");
 }
 
-class MyClass {
+class NamespacedGlobalFunctionsFixture {
 	public function notTooLong() {
 		$foo = 'bar';
 		$foo;

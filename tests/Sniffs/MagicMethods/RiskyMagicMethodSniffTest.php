@@ -1,8 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
-namespace ModernWpcsStandardTest;
+namespace ModernWpcsStandard\Tests\Sniffs\MagicMethods;
 
+use ModernWpcsStandard\Tests\SniffTestHelper;
 use PHPUnit\Framework\TestCase;
 
 class RiskyMagicMethodSniffTest extends TestCase {

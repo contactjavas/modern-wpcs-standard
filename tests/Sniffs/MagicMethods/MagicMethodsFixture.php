@@ -1,5 +1,10 @@
 <?php
-class MyClass {
+
+declare(strict_types=1);
+
+namespace ModernWpcsStandard\Tests\Sniffs\MagicMethods;
+
+class MagicMethodsFixture {
 	public function doSomething() {
 		$all = ['foo' => 'bar' ];
 		$rest = array('x' => 'y');

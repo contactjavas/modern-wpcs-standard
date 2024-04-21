@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace ModernWpcsStandardTest;
+namespace ModernWpcsStandard\Tests;
 
 use PHP_CodeSniffer\Files\LocalFile;
 use PHP_CodeSniffer\Ruleset;

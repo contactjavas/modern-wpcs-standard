@@ -1,28 +1,35 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace ModernWpcsStandard\Sniffs\Conditions;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
 class DisallowConditionAssignWithoutConditionalSniff implements Sniff {
-	public function register() {
+	public function register(): array {
 		return [T_OPEN_PARENTHESIS];
 	}
 
-	public function process(File $phpcsFile, $stackPtr) {
+	public function process( File $phpcsFile, mixed $stackPtr ): void {
 		$tokens = $phpcsFile->getTokens();
+		
 		// if previous non-whitespace token is `T_IF`
-		$prevNonWhitespacePtr = $phpcsFile->findPrevious(T_WHITESPACE, $stackPtr - 1, null, true, null, false);
-		if ($tokens[$prevNonWhitespacePtr]['type'] !== 'T_IF') {
+		$prevNonWhitespacePtr = $phpcsFile->findPrevious( T_WHITESPACE, $stackPtr - 1, null, true, null, false );
+		
+		if ( $tokens[$prevNonWhitespacePtr]['type'] !== 'T_IF' ) {
 			return;
 		}
+		
 		// if there is a T_EQUAL after this before the end of statement
-		$endOfStatementPtr = $phpcsFile->findEndOfStatement($stackPtr + 1);
-		$nextAssignPtr = $phpcsFile->findNext(T_EQUAL, $stackPtr + 1, $endOfStatementPtr, false, null, false);
-		if (! $nextAssignPtr) {
+		$endOfStatementPtr = $phpcsFile->findEndOfStatement( $stackPtr + 1 );
+		$nextAssignPtr = $phpcsFile->findNext( T_EQUAL, $stackPtr + 1, $endOfStatementPtr, false, null, false );
+		
+		if ( ! $nextAssignPtr ) {
 			return;
 		}
+		
 		// if there is not a T_IS_EQUAL (or any other comparator!) before the end of statement
 		$comparators = [
 			T_IS_EQUAL,
@@ -35,12 +42,15 @@ class DisallowConditionAssignWithoutConditionalSniff implements Sniff {
 			T_GREATER_THAN,
 			T_SPACESHIP,
 		];
-		$nextEqualPtr = $phpcsFile->findNext($comparators, $stackPtr + 1, $endOfStatementPtr, false, null, false);
-		if ($nextEqualPtr) {
+		
+		$nextEqualPtr = $phpcsFile->findNext( $comparators, $stackPtr + 1, $endOfStatementPtr, false, null, false );
+		
+		if ( $nextEqualPtr ) {
 			return;
 		}
+
 		// mark an error
 		$error = 'Conditions that contain assignments must have explicit comparators';
-		$phpcsFile->addError($error, $stackPtr, 'ConditionAssignWithoutConditional');
+		$phpcsFile->addError( $error, $stackPtr, 'ConditionAssignWithoutConditional' );
 	}
 }

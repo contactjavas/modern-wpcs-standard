@@ -1,6 +1,8 @@
 <?php
 
-function doSomething($arg1, $arg2, $arg3) {
+declare( strict_types=1 );
+
+function doSomething(string $arg1, string $arg2, string $arg3) {
 }
 
 // Next line should report call_user_func is not allowed

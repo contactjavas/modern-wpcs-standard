@@ -1,32 +1,28 @@
-<?php declare(strict_types=1); # -*- coding: utf-8 -*-
+<?php
 
-namespace Just\Some\Test\Auth;
+declare(strict_types=1); # -*- coding: utf-8 -*-
+
+namespace ModernWpcsStandard\Tests\Sniffs\Functions;
 
 use Brain\Nonces\NonceInterface;
 
+interface InterfaceFixture {
 
-/**
- * Interface SettingsPageAuthInterface
- *
- * @package Just\Some\Test\Auth
- */
-interface SettingsPageAuthInterface
-{
 
-    /**
-     * @param array $request_data
-     *
-     * @return bool
-     */
-    public function isAllowed(array $request_data = []): bool;
+	/**
+	 * @param array $request_data
+	 *
+	 * @return bool
+	 */
+	public function isAllowed(array $request_data = []): bool;
 
-    /**
-     * @return NonceInterface
-     */
-    public function nonce(): NonceInterface;
+	/**
+	 * @return mixed
+	 */
+	public function nonce(): mixed;
 
-    /**
-     * @return string
-     */
-    public function cap(): string;
+	/**
+	 * @return string
+	 */
+	public function cap(): string;
 }

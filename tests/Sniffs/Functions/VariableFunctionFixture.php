@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 function doSomething($arg1, $arg2, $arg3) {
 }
 

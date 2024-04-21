@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 namespace ModernWpcsStandard\Sniffs\Functions;
 
 use ModernWpcsStandard\SniffHelpers;
@@ -9,21 +11,23 @@ use PHP_CodeSniffer\Files\File;
 class LongFunctionSniff implements Sniff {
 	public $maxFunctionLines = 40;
 
-	public function register() {
+	public function register(): array {
 		return [T_FUNCTION];
 	}
 
-	public function process(File $phpcsFile, $stackPtr) {
+	public function process( File $phpcsFile, mixed $stackPtr ): void {
 		$helper = new SniffHelpers();
-		if ($helper->isFunctionJustSignature($phpcsFile, $stackPtr)) {
+		
+		if ( $helper->isFunctionJustSignature( $phpcsFile, $stackPtr ) ) {
 			return;
 		}
+		
 		$tokens = $phpcsFile->getTokens();
 		$startOfFunctionPtr = $helper->getStartOfFunctionPtr(
 			$phpcsFile,
 			$stackPtr
 		);
-		$endOfFunctionPtr = $helper->getEndOfFunctionPtr($phpcsFile, $stackPtr);
+		$endOfFunctionPtr = $helper->getEndOfFunctionPtr( $phpcsFile, $stackPtr );
 		$newlineCount = 0;
 		$commentTokens = [
 			T_DOC_COMMENT_OPEN_TAG,
@@ -43,9 +47,11 @@ class LongFunctionSniff implements Sniff {
 				"\n"
 			) + 2;
 		$foundNonComment = false;
-		for ($index = $currentLinePtr; $index < $endOfFunctionPtr; $index++) {
+
+		for ( $index = $currentLinePtr; $index < $endOfFunctionPtr; $index++ ) {
 			$token = $tokens[$index];
-			if (!in_array($token['code'], $commentTokens)) {
+			
+			if ( !in_array( $token['code'], $commentTokens ) ) {
 				if (
 					$token['code'] !== T_WHITESPACE ||
 					$token['content'] !== "\n"
@@ -53,19 +59,22 @@ class LongFunctionSniff implements Sniff {
 					$foundNonComment = true;
 				}
 			}
+
 			if (
-				in_array($token['code'], $newlineContainingTokens) &&
-				$helper->doesStringEndWith($token['content'], "\n")
+				in_array( $token['code'], $newlineContainingTokens ) &&
+				$helper->doesStringEndWith( $token['content'], "\n" )
 			) {
-				if ($foundNonComment) {
+				if ( $foundNonComment ) {
 					$newlineCount++;
 				}
+
 				$foundNonComment = false;
 			}
 		}
-		if (intval($newlineCount) > $this->maxFunctionLines) {
+		
+		if ( intval( $newlineCount ) > $this->maxFunctionLines ) {
 			$error = "Function is longer than {$this->maxFunctionLines} lines";
-			$phpcsFile->addWarning($error, $stackPtr, 'LongFunction');
+			$phpcsFile->addWarning( $error, $stackPtr, 'LongFunction' );
 		}
 	}
 }

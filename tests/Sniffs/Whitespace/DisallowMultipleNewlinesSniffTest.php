@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace ModernWpcsStandardTest;
+namespace ModernWpcsStandard\Tests\Sniffs\Whitespace;
 
+use ModernWpcsStandard\Tests\SniffTestHelper;
 use PHPUnit\Framework\TestCase;
 
 class DisallowMultipleNewlinesSniffTest extends TestCase {

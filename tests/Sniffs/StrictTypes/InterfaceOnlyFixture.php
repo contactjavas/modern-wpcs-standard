@@ -1,6 +1,8 @@
 <?php
 
-namespace Just\Some\Testing;
+declare(strict_types=1);
+
+namespace ModernWpcsStandard\Tests\Sniffs\StrictTypes;
 
 # Just a comment
 

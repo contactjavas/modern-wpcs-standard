@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 $myAry = [
 	// Next two lines should report
 	'one' => 'one',

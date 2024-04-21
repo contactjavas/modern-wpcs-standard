@@ -1,8 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
-namespace ModernWpcsStandardTest;
+namespace ModernWpcsStandard\Tests\Sniffs\Extract;
 
+use ModernWpcsStandard\Tests\SniffTestHelper;
 use PHPUnit\Framework\TestCase;
 
 class DisallowExtractSniffTest extends TestCase {

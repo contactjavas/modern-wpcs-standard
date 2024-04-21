@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 $myAry = [
 	// Next two lines should report
 	'one'   => 'one',
@@ -15,7 +17,7 @@ $myAry = [
 ];
 
 $myAry = [
-     'one' => 'one',
-     'two' => 'two',
-     'three' => 'three',
+	 'one' => 'one',
+	 'two' => 'two',
+	 'three' => 'three',
 ];

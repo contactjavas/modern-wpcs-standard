@@ -1,8 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
-namespace ModernWpcsStandardTest;
+namespace ModernWpcsStandard\Tests\Sniffs\Globals;
 
+use ModernWpcsStandard\Tests\SniffTestHelper;
 use PHPUnit\Framework\TestCase;
 
 class DisallowGlobalFunctionsSniffTest extends TestCase {

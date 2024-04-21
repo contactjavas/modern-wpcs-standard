@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types=1 );
+
 // Next three lines should report
 $foo     = 'bar';
 $foobar  = 'foobar';

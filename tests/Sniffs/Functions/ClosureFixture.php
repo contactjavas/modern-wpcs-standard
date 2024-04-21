@@ -1,5 +1,10 @@
 <?php
-class MyClass {
+
+declare( strict_types=1 );
+
+namespace ModernWpcsStandard\Tests\Sniffs\Functions;
+
+class ClosureFixture {
 	public function hasClosureWithReturnAndNoHint() {
 		// Next line should warn about no type hint
 		$myFunc = function () {
@@ -37,7 +42,7 @@ class MyClass {
 
 	public function hasClosureWithReturnAndWrongSpacing3() {
 		// Next line should warn about type hint spacing
-		$myFunc = function (): bool{
+		$myFunc = function (): bool {
 			return true;
 		};
 	}

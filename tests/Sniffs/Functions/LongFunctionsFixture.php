@@ -1,5 +1,10 @@
 <?php
-abstract class MyClass {
+
+declare( strict_types=1 );
+
+namespace ModernWpcsStandard\Tests\Sniffs\Functions;
+
+abstract class LongFunctionsFixture {
 	public function notTooLong() {
 		/**
 		 * Lorem ipsum
