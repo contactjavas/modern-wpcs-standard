@@ -13,58 +13,58 @@ class RequireNewlineBetweenFunctionsSniff implements Sniff {
 		return [T_FUNCTION];
 	}
 
-	public function process( File $phpcsFile, mixed $stackPtr ): void {
+	public function process(File $phpcsFile, mixed $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
 		$helper = new SniffHelpers();
 		
-		if ( $helper->isFunctionJustSignature( $phpcsFile, $stackPtr ) ) {
+		if ( $helper->isFunctionJustSignature($phpcsFile, $stackPtr)) {
 			return;
 		}
 		
-		$endofFuncPtr = $helper->getEndOfFunctionPtr( $phpcsFile, $stackPtr );
+		$endofFuncPtr = $helper->getEndOfFunctionPtr($phpcsFile, $stackPtr);
 		
-		if ( ! $endofFuncPtr ) {
+		if ( ! $endofFuncPtr) {
 			return;
 		}
 		
-		$endOfLinePtr = $helper->getNextNewlinePtr( $phpcsFile, $endofFuncPtr );
+		$endOfLinePtr = $helper->getNextNewlinePtr($phpcsFile, $endofFuncPtr);
 		
-		if ( ! $endOfLinePtr || ! isset( $tokens[$endOfLinePtr + 1] ) ) {
+		if ( ! $endOfLinePtr || ! isset($tokens[$endOfLinePtr + 1])) {
 			return;
 		}
 		
 		$nextToken = $tokens[$endOfLinePtr + 1];
 		
-		if ( ! isset( $nextToken['content'] ) || $nextToken['content'] === "\n" ) {
+		if ( ! isset($nextToken['content']) || str_ends_with($nextToken['content'], "\n")) {
 			return;
 		}
 		
 		// Only trigger if the next line contains a function definition
 		// or a comment
-		$nextEndOfLinePtr = $helper->getNextNewlinePtr( $phpcsFile, $endofFuncPtr + 1 );
+		$nextEndOfLinePtr = $helper->getNextNewlinePtr($phpcsFile, $endofFuncPtr + 1);
 		$forbiddenTypes = [
 			T_FUNCTION,
 			T_COMMENT,
 		];
-		$nextForbiddenToken = $phpcsFile->findNext( $forbiddenTypes, $endOfLinePtr + 1, null, false, null, true );
+		$nextForbiddenToken = $phpcsFile->findNext($forbiddenTypes, $endOfLinePtr + 1, null, false, null, true);
 		
-		if ( ! $nextForbiddenToken || $nextForbiddenToken > $nextEndOfLinePtr ) {
+		if ( ! $nextForbiddenToken || $nextForbiddenToken > $nextEndOfLinePtr) {
 			return;
 		}
 
 		$error = 'Functions must be separated by a blank line';
-		$shouldFix = $phpcsFile->addFixableError( $error, $endofFuncPtr, 'MissingNewline' );
+		$shouldFix = $phpcsFile->addFixableError($error, $endofFuncPtr, 'MissingNewline');
 		
-		if ( $shouldFix ) {
-			$this->fixTokens( $phpcsFile, $stackPtr );
+		if ( $shouldFix) {
+			$this->fixTokens($phpcsFile, $stackPtr);
 		}
 	}
 
-	private function fixTokens( File $phpcsFile, $stackPtr ) {
+	private function fixTokens(File $phpcsFile, $stackPtr) {
 		$helper = new SniffHelpers();
-		$endofFuncPtr = $helper->getEndOfFunctionPtr( $phpcsFile, $stackPtr );
+		$endofFuncPtr = $helper->getEndOfFunctionPtr($phpcsFile, $stackPtr);
 		$phpcsFile->fixer->beginChangeset();
-		$phpcsFile->fixer->addNewline( $endofFuncPtr );
+		$phpcsFile->fixer->addNewline($endofFuncPtr);
 		$phpcsFile->fixer->endChangeset();
 	}
 }

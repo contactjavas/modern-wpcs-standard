@@ -19,6 +19,6 @@ class DisallowMagicMethodsSniffTest extends TestCase {
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFiles, $fixtureFile);
 		$phpcsFile->process();
 		$lines = $helper->getErrorLineNumbersFromFile($phpcsFile);
-		$this->assertEquals([17, 21, 26], $lines);
+		$this->assertEquals([22, 26, 31], $lines);
 	}
 }

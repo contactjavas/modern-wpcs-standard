@@ -16,7 +16,7 @@ class DisallowAssignAlignSniffTest extends TestCase {
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
 		$phpcsFile->process();
 		$lines = $helper->getWarningLineNumbersFromFile($phpcsFile);
-		$this->assertEquals([4,5,6,10,11,15,16,19,20], $lines);
+		$this->assertEquals([6,7,8,12,13,17,18,21,22], $lines);
 	}
 
 	public function testDisallowAlignedArrays() {
@@ -27,7 +27,7 @@ class DisallowAssignAlignSniffTest extends TestCase {
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
 		$phpcsFile->process();
 		$lines = $helper->getWarningLineNumbersFromFile($phpcsFile);
-		$this->assertEquals([5,6], $lines);
+		$this->assertEquals([7,8], $lines);
 	}
 
 	public function testDisallowAlignedArguments() {
@@ -38,7 +38,7 @@ class DisallowAssignAlignSniffTest extends TestCase {
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
 		$phpcsFile->process();
 		$lines = $helper->getWarningLineNumbersFromFile($phpcsFile);
-		$this->assertEquals([6], $lines);
+		$this->assertEquals([8], $lines);
 	}
 
 	public function testDisallowAlignedArgumentsFix() {

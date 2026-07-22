@@ -12,17 +12,17 @@ class RiskyMagicMethodSniff implements Sniff {
 		return [T_FUNCTION];
 	}
 
-	public function process( File $phpcsFile, mixed $stackPtr ): void {
-		$functionName = $phpcsFile->getDeclarationName( $stackPtr );
+	public function process(File $phpcsFile, mixed $stackPtr): void {
+		$functionName = $phpcsFile->getDeclarationName($stackPtr);
 		$riskyMagicMethods = [
 			'__invoke',
 			'__call',
 			'__callStatic',
 		];
 		
-		if ( in_array( $functionName, $riskyMagicMethods ) ) {
+		if ( in_array($functionName, $riskyMagicMethods)) {
 			$error = 'Magic methods are discouraged';
-			$phpcsFile->addWarning( $error, $stackPtr, 'RiskyMagicMethod' );
+			$phpcsFile->addWarning($error, $stackPtr, 'RiskyMagicMethod');
 		}
 	}
 }

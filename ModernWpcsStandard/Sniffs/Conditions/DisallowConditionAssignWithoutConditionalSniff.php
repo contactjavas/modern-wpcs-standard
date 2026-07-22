@@ -12,21 +12,21 @@ class DisallowConditionAssignWithoutConditionalSniff implements Sniff {
 		return [T_OPEN_PARENTHESIS];
 	}
 
-	public function process( File $phpcsFile, mixed $stackPtr ): void {
+	public function process(File $phpcsFile, mixed $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
 		
 		// if previous non-whitespace token is `T_IF`
-		$prevNonWhitespacePtr = $phpcsFile->findPrevious( T_WHITESPACE, $stackPtr - 1, null, true, null, false );
+		$prevNonWhitespacePtr = $phpcsFile->findPrevious(T_WHITESPACE, $stackPtr - 1, null, true, null, false);
 		
-		if ( $tokens[$prevNonWhitespacePtr]['type'] !== 'T_IF' ) {
+		if ( $tokens[$prevNonWhitespacePtr]['type'] !== 'T_IF') {
 			return;
 		}
 		
 		// if there is a T_EQUAL after this before the end of statement
-		$endOfStatementPtr = $phpcsFile->findEndOfStatement( $stackPtr + 1 );
-		$nextAssignPtr = $phpcsFile->findNext( T_EQUAL, $stackPtr + 1, $endOfStatementPtr, false, null, false );
+		$endOfStatementPtr = $phpcsFile->findEndOfStatement($stackPtr + 1);
+		$nextAssignPtr = $phpcsFile->findNext(T_EQUAL, $stackPtr + 1, $endOfStatementPtr, false, null, false);
 		
-		if ( ! $nextAssignPtr ) {
+		if ( ! $nextAssignPtr) {
 			return;
 		}
 		
@@ -43,14 +43,14 @@ class DisallowConditionAssignWithoutConditionalSniff implements Sniff {
 			T_SPACESHIP,
 		];
 		
-		$nextEqualPtr = $phpcsFile->findNext( $comparators, $stackPtr + 1, $endOfStatementPtr, false, null, false );
+		$nextEqualPtr = $phpcsFile->findNext($comparators, $stackPtr + 1, $endOfStatementPtr, false, null, false);
 		
-		if ( $nextEqualPtr ) {
+		if ( $nextEqualPtr) {
 			return;
 		}
 
 		// mark an error
 		$error = 'Conditions that contain assignments must have explicit comparators';
-		$phpcsFile->addError( $error, $stackPtr, 'ConditionAssignWithoutConditional' );
+		$phpcsFile->addError($error, $stackPtr, 'ConditionAssignWithoutConditional');
 	}
 }

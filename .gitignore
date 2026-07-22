@@ -4,3 +4,4 @@ phpunit.xml
 .phpcs.xml
 phpcs.xml
 .vscode
+.phpunit.result.cache

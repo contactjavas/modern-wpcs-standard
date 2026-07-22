@@ -15,10 +15,10 @@ class LongFunctionSniff implements Sniff {
 		return [T_FUNCTION];
 	}
 
-	public function process( File $phpcsFile, mixed $stackPtr ): void {
+	public function process(File $phpcsFile, mixed $stackPtr): void {
 		$helper = new SniffHelpers();
 		
-		if ( $helper->isFunctionJustSignature( $phpcsFile, $stackPtr ) ) {
+		if ( $helper->isFunctionJustSignature($phpcsFile, $stackPtr)) {
 			return;
 		}
 		
@@ -27,7 +27,7 @@ class LongFunctionSniff implements Sniff {
 			$phpcsFile,
 			$stackPtr
 		);
-		$endOfFunctionPtr = $helper->getEndOfFunctionPtr( $phpcsFile, $stackPtr );
+		$endOfFunctionPtr = $helper->getEndOfFunctionPtr($phpcsFile, $stackPtr);
 		$newlineCount = 0;
 		$commentTokens = [
 			T_DOC_COMMENT_OPEN_TAG,
@@ -48,10 +48,10 @@ class LongFunctionSniff implements Sniff {
 			) + 2;
 		$foundNonComment = false;
 
-		for ( $index = $currentLinePtr; $index < $endOfFunctionPtr; $index++ ) {
+		for ( $index = $currentLinePtr; $index < $endOfFunctionPtr; $index++) {
 			$token = $tokens[$index];
 			
-			if ( !in_array( $token['code'], $commentTokens ) ) {
+			if ( !in_array($token['code'], $commentTokens)) {
 				if (
 					$token['code'] !== T_WHITESPACE ||
 					$token['content'] !== "\n"
@@ -61,10 +61,10 @@ class LongFunctionSniff implements Sniff {
 			}
 
 			if (
-				in_array( $token['code'], $newlineContainingTokens ) &&
-				$helper->doesStringEndWith( $token['content'], "\n" )
+				in_array($token['code'], $newlineContainingTokens) &&
+				$helper->doesStringEndWith($token['content'], "\n")
 			) {
-				if ( $foundNonComment ) {
+				if ( $foundNonComment) {
 					$newlineCount++;
 				}
 
@@ -72,9 +72,9 @@ class LongFunctionSniff implements Sniff {
 			}
 		}
 		
-		if ( intval( $newlineCount ) > $this->maxFunctionLines ) {
+		if ( intval($newlineCount) > $this->maxFunctionLines) {
 			$error = "Function is longer than {$this->maxFunctionLines} lines";
-			$phpcsFile->addWarning( $error, $stackPtr, 'LongFunction' );
+			$phpcsFile->addWarning($error, $stackPtr, 'LongFunction');
 		}
 	}
 }

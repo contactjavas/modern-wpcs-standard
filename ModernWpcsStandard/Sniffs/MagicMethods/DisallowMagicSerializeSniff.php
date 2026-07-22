@@ -12,12 +12,12 @@ class DisallowMagicSerializeSniff implements Sniff {
 		return [T_FUNCTION];
 	}
 
-	public function process( File $phpcsFile, mixed $stackPtr ): void {
-		$functionName = $phpcsFile->getDeclarationName( $stackPtr );
+	public function process(File $phpcsFile, mixed $stackPtr): void {
+		$functionName = $phpcsFile->getDeclarationName($stackPtr);
 
-		if ( $functionName === '__serialize' ) {
+		if ( $functionName === '__serialize') {
 			$error = 'Magic serialize is not allowed';
-			$phpcsFile->addError( $error, $stackPtr, 'MagicSerialize' );
+			$phpcsFile->addError($error, $stackPtr, 'MagicSerialize');
 		}
 	}
 }

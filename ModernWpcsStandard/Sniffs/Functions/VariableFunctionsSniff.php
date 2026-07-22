@@ -13,19 +13,19 @@ class VariableFunctionsSniff implements Sniff {
 		return [T_VARIABLE];
 	}
 
-	public function process( File $phpcsFile, mixed $stackPtr ): void {
+	public function process(File $phpcsFile, mixed $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
-		$nextNonWhitespacePtr = $phpcsFile->findNext( T_WHITESPACE, $stackPtr + 1, null, true, null, false );
+		$nextNonWhitespacePtr = $phpcsFile->findNext(T_WHITESPACE, $stackPtr + 1, null, true, null, false);
 		
-		if ( ! $nextNonWhitespacePtr ) {
+		if ( ! $nextNonWhitespacePtr) {
 			return;
 		}
 		
-		if ( $tokens[$nextNonWhitespacePtr]['code'] !== T_OPEN_PARENTHESIS ) {
+		if ( $tokens[$nextNonWhitespacePtr]['code'] !== T_OPEN_PARENTHESIS) {
 			return;
 		}
 		
 		$message = 'Variable functions are discouraged';
-		$phpcsFile->addWarning( $message, $stackPtr, 'VariableFunction' );
+		$phpcsFile->addWarning($message, $stackPtr, 'VariableFunction');
 	}
 }

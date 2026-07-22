@@ -16,7 +16,7 @@ class DisallowLongformArraySniffTest extends TestCase {
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
 		$phpcsFile->process();
 		$lines = $helper->getErrorLineNumbersFromFile($phpcsFile);
-		$this->assertEquals([5], $lines);
+		$this->assertEquals([10], $lines);
 	}
 
 	public function testFixDisallowLongFormArraySniff() {

@@ -21,7 +21,7 @@ class LongFunctionSniffTest extends TestCase {
 		);
 		$phpcsFile->process();
 		$warnings = $helper->getWarningLineNumbersFromFile($phpcsFile);
-		$this->assertEquals([61], $warnings);
+		$this->assertEquals([66], $warnings);
 	}
 
 	public function testLongFunctionWithDifferentLength() {
@@ -38,7 +38,7 @@ class LongFunctionSniffTest extends TestCase {
 		$phpcsFile->ruleset->setSniffProperty(
 			'ModernWpcsStandard\Sniffs\Functions\LongFunctionSniff',
 			'maxFunctionLines',
-			'50'
+			['scope' => 'sniff', 'value' => 70]
 		);
 		$phpcsFile->process();
 		$lines = $helper->getWarningLineNumbersFromFile($phpcsFile);
@@ -60,11 +60,11 @@ class LongFunctionSniffTest extends TestCase {
 		$phpcsFile->ruleset->setSniffProperty(
 			'ModernWpcsStandard\Sniffs\Functions\LongFunctionSniff',
 			'maxFunctionLines',
-			'2'
+			['scope' => 'sniff', 'value' => 2]
 		);
 		$phpcsFile->process();
 		$lines = $helper->getWarningLineNumbersFromFile($phpcsFile);
-		$expectedLines = [3, 61];
+		$expectedLines = [8, 66];
 		$this->assertEquals($expectedLines, $lines);
 	}
 }

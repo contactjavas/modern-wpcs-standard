@@ -13,14 +13,14 @@ class DisallowExtractSniff implements Sniff {
 		return [T_STRING];
 	}
 
-	public function process( File $phpcsFile, mixed $stackPtr ): void {
+	public function process(File $phpcsFile, mixed $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
 		$functionName = $tokens[$stackPtr]['content'];
 		$helper = new SniffHelpers();
 
-		if ( $functionName === 'extract' && $helper->isFunctionCall( $phpcsFile, $stackPtr ) ) {
+		if ( $functionName === 'extract' && $helper->isFunctionCall($phpcsFile, $stackPtr)) {
 			$error = 'Extract is not allowed';
-			$phpcsFile->addError( $error, $stackPtr, 'Extract' );
+			$phpcsFile->addError($error, $stackPtr, 'Extract');
 		}
 	}
 }

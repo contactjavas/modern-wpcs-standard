@@ -15,6 +15,6 @@ class VariableFunctionsSniffTest extends TestCase {
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
 		$phpcsFile->process();
 		$lines = $helper->getWarningLineNumbersFromFile($phpcsFile);
-		$this->assertEquals([8, 11], $lines);
+		$this->assertEquals([10, 13], $lines);
 	}
 }

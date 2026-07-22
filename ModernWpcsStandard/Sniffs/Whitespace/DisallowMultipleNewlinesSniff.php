@@ -13,36 +13,36 @@ class DisallowMultipleNewlinesSniff implements Sniff {
 		return [T_WHITESPACE];
 	}
 
-	public function process( File $phpcsFile, mixed $stackPtr ): void {
+	public function process(File $phpcsFile, mixed $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
 
-		if ( $tokens[$stackPtr]['content'] !== "\n" ) {
+		if ( str_ends_with($tokens[$stackPtr]['content'], "\n") === false) {
 			return;
 		}
 		
-		if ( $stackPtr < 3 ) {
+		if ( $stackPtr < 3) {
 			return;
 		}
 		
-		if ( $tokens[$stackPtr - 1]['content'] !== "\n" ) {
+		if ( str_ends_with($tokens[$stackPtr - 1]['content'], "\n") === false) {
 			return;
 		}
 		
-		if ( $tokens[$stackPtr - 2]['content'] !== "\n" ) {
+		if ( str_ends_with($tokens[$stackPtr - 2]['content'], "\n") === false) {
 			return;
 		}
 		
 		$error = 'Multiple adjacent blank lines are not allowed';
-		$shouldFix = $phpcsFile->addFixableError( $error, $stackPtr, 'MultipleNewlines' );
+		$shouldFix = $phpcsFile->addFixableError($error, $stackPtr, 'MultipleNewlines');
 		
-		if ( $shouldFix ) {
-			$this->fixTokens( $phpcsFile, $stackPtr );
+		if ( $shouldFix) {
+			$this->fixTokens($phpcsFile, $stackPtr);
 		}
 	}
 
-	private function fixTokens( File $phpcsFile, int $stackPtr ): void {
+	private function fixTokens(File $phpcsFile, int $stackPtr): void {
 		$phpcsFile->fixer->beginChangeset();
-		$phpcsFile->fixer->replaceToken( $stackPtr, '' );
+		$phpcsFile->fixer->replaceToken($stackPtr, '');
 		$phpcsFile->fixer->endChangeset();
 	}
 }

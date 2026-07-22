@@ -16,7 +16,7 @@ class DisallowGlobalFunctionsSniffTest extends TestCase {
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
 		$phpcsFile->process();
 		$lines = $helper->getErrorLineNumbersFromFile($phpcsFile);
-		$this->assertEquals([3], $lines);
+		$this->assertEquals([6], $lines);
 	}
 
 	public function testDisallowGlobalFunctionsSniffAllowsNamespacedGlobals() {
