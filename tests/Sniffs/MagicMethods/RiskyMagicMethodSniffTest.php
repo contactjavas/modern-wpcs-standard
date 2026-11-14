@@ -17,6 +17,6 @@ class RiskyMagicMethodSniffTest extends TestCase {
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFiles, $fixtureFile);
 		$phpcsFile->process();
 		$lines = $helper->getWarningLineNumbersFromFile($phpcsFile);
-		$this->assertEquals([37, 41, 47], $lines);
+		$this->assertEquals([37, 41, 47, 63, 66], $lines);
 	}
 }

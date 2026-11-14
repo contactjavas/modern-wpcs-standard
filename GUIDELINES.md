@@ -18,9 +18,11 @@ Using `extract()` declares variables without declaration statements which obfusc
 
 ## Magic methods
 
-**New code MUST NOT use the magic methods __get, __set, or __serialize.**
+**New code MUST NOT use the magic methods __get or __set.**
 
 **New code SHOULD NOT use the magic methods __invoke, __call, or __callStatic.**
+
+**New code MUST NOT implement the deprecated `Serializable` interface.** Use `__serialize()` and `__unserialize()` instead.
 
 Magic methods can hide behavior which can mislead future developers. Traditional getters and setters are usually easier to understand.
 

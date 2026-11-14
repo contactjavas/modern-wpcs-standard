@@ -18,7 +18,7 @@ class MagicMethodsFixture {
 		return 'hello';
 	}
 
-	// Next line should report no seralize allowed
+	// __serialize is allowed (modern replacement for Serializable)
 	public function __serialize() {
 	}
 
@@ -47,5 +47,39 @@ class MagicMethodsFixture {
 	public static function __callStatic($name, $args) {
 		$name;
 		$args;
+	}
+}
+
+class MagicMethodsCaseFixture {
+	public function __GET($var) {
+	}
+
+	public function __Set($var, $val) {
+	}
+
+	public function __SERIALIZE() {
+	}
+
+	public static function __callstatic($name, $args) {
+	}
+
+	public function __INVOKE() {
+	}
+
+	public function __get_value() {
+	}
+}
+
+class SerializableFixture implements \Serializable {
+}
+
+class SerializableCaseFixture implements \Countable, serializable {
+}
+
+$anon = new class implements \Serializable {
+};
+
+class ModernSerializeFixture implements \JsonSerializable {
+	public function __unserialize(array $data) {
 	}
 }

@@ -13,12 +13,12 @@ class DisallowMagicMethodsSniffTest extends TestCase {
 		$sniffFiles = [
 			__DIR__ . '/../../../ModernWpcsStandard/Sniffs/MagicMethods/DisallowMagicGetSniff.php',
 			__DIR__ . '/../../../ModernWpcsStandard/Sniffs/MagicMethods/DisallowMagicSetSniff.php',
-			__DIR__ . '/../../../ModernWpcsStandard/Sniffs/MagicMethods/DisallowMagicSerializeSniff.php',
+			__DIR__ . '/../../../ModernWpcsStandard/Sniffs/MagicMethods/DisallowSerializableInterfaceSniff.php',
 		];
 		$helper = new SniffTestHelper();
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFiles, $fixtureFile);
 		$phpcsFile->process();
 		$lines = $helper->getErrorLineNumbersFromFile($phpcsFile);
-		$this->assertEquals([22, 26, 31], $lines);
+		$this->assertEquals([26, 31, 54, 57, 73, 76, 79], $lines);
 	}
 }
