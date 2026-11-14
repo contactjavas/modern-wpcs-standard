@@ -4,7 +4,6 @@ declare( strict_types=1 );
 
 namespace ModernWpcsStandard\Sniffs\Arrays;
 
-use ModernWpcsStandard\SniffHelpers;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
@@ -15,25 +14,35 @@ class DisallowLongformArraySniff implements Sniff {
 
 	public function process(File $phpcsFile, mixed $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
-		$functionName = $tokens[$stackPtr]['content'];
-		$helper = new SniffHelpers();
 
-		if ( $functionName === 'array' && $helper->isFunctionCall($phpcsFile, $stackPtr)) {
-			$error = 'Longform array is not allowed';
-			$shouldFix = $phpcsFile->addFixableError($error, $stackPtr, 'LongformArray');
-			
-			if ( $shouldFix) {
-				$this->fixTokens($phpcsFile, $stackPtr);
-			}
+		// Only `array(...)` literals carry parenthesis pointers; the `array` type keyword does not.
+		if ( ! isset($tokens[$stackPtr]['parenthesis_opener'], $tokens[$stackPtr]['parenthesis_closer'])) {
+			return;
+		}
+
+		$error = 'Longform array is not allowed';
+		$openParenPtr = $tokens[$stackPtr]['parenthesis_opener'];
+		$nonWhitespaceBeforeParen = $phpcsFile->findNext(T_WHITESPACE, $stackPtr + 1, $openParenPtr, true);
+
+		if ( $nonWhitespaceBeforeParen !== false) {
+			// A comment sits between `array` and `(`; don't risk mangling it.
+			$phpcsFile->addError($error, $stackPtr, 'LongformArray');
+			return;
+		}
+
+		if ( $phpcsFile->addFixableError($error, $stackPtr, 'LongformArray')) {
+			$this->fixTokens($phpcsFile, $stackPtr);
 		}
 	}
 
-	private function fixTokens(File $phpcsFile, mixed $stackPtr): void {
+	private function fixTokens(File $phpcsFile, int $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
 		$openParenPtr = $tokens[$stackPtr]['parenthesis_opener'];
 		$closeParenPtr = $tokens[$stackPtr]['parenthesis_closer'];
 		$phpcsFile->fixer->beginChangeset();
-		$phpcsFile->fixer->replaceToken($stackPtr, '');
+		for ( $ptr = $stackPtr; $ptr < $openParenPtr; $ptr++) {
+			$phpcsFile->fixer->replaceToken($ptr, '');
+		}
 		$phpcsFile->fixer->replaceToken($openParenPtr, '[');
 		$phpcsFile->fixer->replaceToken($closeParenPtr, ']');
 		$phpcsFile->fixer->endChangeset();

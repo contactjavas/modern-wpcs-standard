@@ -10,4 +10,13 @@ class ArraysFixture {
 		$rest = ['x' => 'y'];
 		$rest;
 	}
+
+	public function moreCases(array $x): array {
+		$a = [ 1 ];
+		$b = [ 1 ];
+		$c = [ 1 ];
+		$d = [ [ 1 ] ];
+		$e = array /* keep */ ( 1 );
+		return [$a, $b, $c, $d, $e, $x];
+	}
 }
