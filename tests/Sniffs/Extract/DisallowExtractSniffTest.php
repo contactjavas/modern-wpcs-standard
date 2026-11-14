@@ -15,6 +15,6 @@ class DisallowExtractSniffTest extends TestCase {
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
 		$phpcsFile->process();
 		$lines = $helper->getErrorLineNumbersFromFile($phpcsFile);
-		$this->assertEquals([11], $lines);
+		$this->assertEquals([11, 21, 22, 23], $lines);
 	}
 }

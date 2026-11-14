@@ -16,3 +16,15 @@ class ExtractFixture {
 		$extract;
 	}
 }
+
+$all = [];
+\extract($all);
+EXTRACT($all);
+Extract ( $all );
+$o->extract($all);
+$o?->extract($all);
+Foo::extract($all);
+new Extract($all);
+Foo\extract($all);
+namespace\extract($all);
+$o-> /* comment */ extract($all);

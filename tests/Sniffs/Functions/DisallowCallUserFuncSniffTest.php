@@ -15,6 +15,6 @@ class DisallowCallUserFuncSniffTest extends TestCase {
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
 		$phpcsFile->process();
 		$lines = $helper->getErrorLineNumbersFromFile($phpcsFile);
-		$this->assertEquals([9, 12], $lines);
+		$this->assertEquals([9, 12, 16, 17, 18], $lines);
 	}
 }

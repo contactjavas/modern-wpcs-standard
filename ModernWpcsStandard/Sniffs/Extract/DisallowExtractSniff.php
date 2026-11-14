@@ -10,15 +10,15 @@ use PHP_CodeSniffer\Files\File;
 
 class DisallowExtractSniff implements Sniff {
 	public function register(): array {
-		return [T_STRING];
+		return [T_STRING, T_NAME_FULLY_QUALIFIED];
 	}
 
 	public function process(File $phpcsFile, mixed $stackPtr): void {
-		$tokens = $phpcsFile->getTokens();
-		$functionName = $tokens[$stackPtr]['content'];
 		$helper = new SniffHelpers();
 
-		if ( $functionName === 'extract' && $helper->isFunctionCall($phpcsFile, $stackPtr)) {
+		if ( $helper->getGlobalFunctionCallName($phpcsFile, $stackPtr) === 'extract'
+			&& $helper->isFunctionCall($phpcsFile, $stackPtr)
+		) {
 			$error = 'Extract is not allowed';
 			$phpcsFile->addError($error, $stackPtr, 'Extract');
 		}

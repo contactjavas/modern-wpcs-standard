@@ -9,20 +9,22 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
 class DisallowCallUserFuncSniff implements Sniff {
+	private const DISALLOWED_FUNCTIONS = [
+		'call_user_func',
+		'call_user_func_array',
+	];
+
 	public function register(): array {
-		return [T_STRING];
+		return [T_STRING, T_NAME_FULLY_QUALIFIED];
 	}
 
 	public function process(File $phpcsFile, mixed $stackPtr): void {
-		$tokens = $phpcsFile->getTokens();
-		$functionName = $tokens[$stackPtr]['content'];
 		$helper = new SniffHelpers();
-		$disallowedFunctions = [
-			'call_user_func',
-			'call_user_func_array',
-		];
-		
-		if ( in_array($functionName, $disallowedFunctions) && $helper->isFunctionCall($phpcsFile, $stackPtr)) {
+		$functionName = $helper->getGlobalFunctionCallName($phpcsFile, $stackPtr);
+
+		if ( in_array($functionName, self::DISALLOWED_FUNCTIONS, true)
+			&& $helper->isFunctionCall($phpcsFile, $stackPtr)
+		) {
 			$error = 'call_user_func and call_user_func_array are not allowed';
 			$phpcsFile->addError($error, $stackPtr, 'CallUserFunc');
 		}
