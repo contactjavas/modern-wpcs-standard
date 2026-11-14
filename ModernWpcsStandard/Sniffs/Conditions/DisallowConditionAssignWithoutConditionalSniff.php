@@ -32,7 +32,7 @@ class DisallowConditionAssignWithoutConditionalSniff implements Sniff {
 		return [T_IF, T_ELSEIF, T_WHILE];
 	}
 
-	public function process(File $phpcsFile, mixed $stackPtr): void {
+	public function process(File $phpcsFile, int $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
 
 		$openerPtr = $this->getConditionOpener($phpcsFile, $stackPtr);

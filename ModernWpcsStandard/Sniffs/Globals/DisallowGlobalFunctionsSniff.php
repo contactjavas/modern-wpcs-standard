@@ -23,7 +23,7 @@ class DisallowGlobalFunctionsSniff implements Sniff {
 		return [T_FUNCTION];
 	}
 
-	public function process(File $phpcsFile, mixed $stackPtr): void {
+	public function process(File $phpcsFile, int $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
 		$conditions = $tokens[$stackPtr]['conditions'];
 

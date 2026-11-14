@@ -4,7 +4,6 @@ declare( strict_types=1 );
 
 namespace ModernWpcsStandard\Sniffs\Whitespace;
 
-use ModernWpcsStandard\SniffHelpers;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
@@ -13,7 +12,7 @@ class RequireParenthesisSpacingSniff implements Sniff {
 		return [T_OPEN_PARENTHESIS, T_CLOSE_PARENTHESIS];
 	}
 
-	public function process(File $phpcsFile, mixed $stackPtr): void {
+	public function process(File $phpcsFile, int $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
 		$token = $tokens[$stackPtr];
 		$isBefore = ( $token['type'] === 'T_OPEN_PARENTHESIS' );

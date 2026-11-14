@@ -4,7 +4,6 @@ declare( strict_types=1 );
 
 namespace ModernWpcsStandard\Sniffs\Functions;
 
-use ModernWpcsStandard\SniffHelpers;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
@@ -13,7 +12,7 @@ class VariableFunctionsSniff implements Sniff {
 		return [T_VARIABLE];
 	}
 
-	public function process(File $phpcsFile, mixed $stackPtr): void {
+	public function process(File $phpcsFile, int $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
 		$nextNonWhitespacePtr = $phpcsFile->findNext(T_WHITESPACE, $stackPtr + 1, null, true, null, false);
 		

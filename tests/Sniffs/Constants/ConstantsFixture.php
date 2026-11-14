@@ -25,3 +25,6 @@ class DefineHolder {
 	public function define() {
 	}
 }
+
+function &define() {
+}

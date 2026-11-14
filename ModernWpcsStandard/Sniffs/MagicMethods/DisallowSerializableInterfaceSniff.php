@@ -15,7 +15,7 @@ class DisallowSerializableInterfaceSniff implements Sniff {
 		return [T_CLASS, T_ANON_CLASS];
 	}
 
-	public function process(File $phpcsFile, mixed $stackPtr): void {
+	public function process(File $phpcsFile, int $stackPtr): void {
 		$interfaceNames = $phpcsFile->findImplementedInterfaceNames($stackPtr);
 
 		if ( $interfaceNames === false) {

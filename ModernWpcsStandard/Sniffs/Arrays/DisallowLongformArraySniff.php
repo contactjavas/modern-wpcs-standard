@@ -12,7 +12,7 @@ class DisallowLongformArraySniff implements Sniff {
 		return [T_ARRAY];
 	}
 
-	public function process(File $phpcsFile, mixed $stackPtr): void {
+	public function process(File $phpcsFile, int $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
 
 		// Only `array(...)` literals carry parenthesis pointers; the `array` type keyword does not.

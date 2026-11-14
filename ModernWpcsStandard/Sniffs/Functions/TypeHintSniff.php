@@ -24,7 +24,7 @@ class TypeHintSniff implements Sniff {
 		return [T_FUNCTION, T_CLOSURE];
 	}
 
-	public function process(File $phpcsFile, mixed $stackPtr): void {
+	public function process(File $phpcsFile, int $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
 
 		// Live coding / parse error.

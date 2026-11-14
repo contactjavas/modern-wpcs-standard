@@ -4,7 +4,6 @@ declare( strict_types=1 );
 
 namespace ModernWpcsStandard\Sniffs\StrictTypes;
 
-use ModernWpcsStandard\SniffHelpers;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
@@ -13,7 +12,7 @@ class RequireStrictTypesSniff implements Sniff {
 		return [T_OPEN_TAG];
 	}
 
-	public function process(File $phpcsFile, mixed $stackPtr): void {
+	public function process(File $phpcsFile, int $stackPtr): void {
 		if ( ! $this->isFirstOpenTag($phpcsFile, $stackPtr)
 			|| $this->isFileOnlyAnInterface($phpcsFile, $stackPtr)
 		) {
@@ -49,7 +48,6 @@ class RequireStrictTypesSniff implements Sniff {
 			T_USE,
 			T_NAMESPACE,
 		];
-		$helper = new SniffHelpers();
 		for ( $ptr = ( $stackPtr + 1 ); isset($tokens[$ptr]); $ptr++) {
 			$token = $tokens[$ptr];
 			if ( $token['level'] > 0) {
@@ -64,7 +62,7 @@ class RequireStrictTypesSniff implements Sniff {
 				continue;
 			}
 			if ( in_array($token['code'], $skipExpressionTokenTypes)) {
-				$ptr = $helper->getNextSemicolonPtr($phpcsFile, $ptr);
+				$ptr = $phpcsFile->findNext(T_SEMICOLON, $ptr + 1);
 				continue;
 			}
 			if ( ! in_array($token['code'], $ignoredTokenTypes)) {

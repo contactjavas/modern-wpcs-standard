@@ -12,7 +12,7 @@ class DisallowMagicGetSniff implements Sniff {
 		return [T_FUNCTION];
 	}
 
-	public function process(File $phpcsFile, mixed $stackPtr): void {
+	public function process(File $phpcsFile, int $stackPtr): void {
 		$functionName = strtolower((string) $phpcsFile->getDeclarationName($stackPtr));
 		
 		if ( $functionName === '__get') {

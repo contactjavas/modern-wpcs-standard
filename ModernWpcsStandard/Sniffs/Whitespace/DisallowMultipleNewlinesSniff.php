@@ -24,7 +24,7 @@ class DisallowMultipleNewlinesSniff implements Sniff {
 	 * `//` comment, open tag). The middle token must be whitespace: tokens like `//` comments
 	 * carry their own trailing newline, so `// a\n`, `// b\n`, `\n` is only one blank line.
 	 */
-	public function process(File $phpcsFile, mixed $stackPtr): void {
+	public function process(File $phpcsFile, int $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
 
 		if ( $stackPtr < 2) {

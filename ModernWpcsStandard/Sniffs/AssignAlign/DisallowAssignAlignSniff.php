@@ -4,7 +4,6 @@ declare( strict_types=1 );
 
 namespace ModernWpcsStandard\Sniffs\AssignAlign;
 
-use ModernWpcsStandard\SniffHelpers;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
@@ -14,7 +13,7 @@ class DisallowAssignAlignSniff implements Sniff {
 		return [T_WHITESPACE];
 	}
 
-	public function process(File $phpcsFile, mixed $stackPtr): void {
+	public function process(File $phpcsFile, int $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
 
 		// If the next non-whitespace after multiple spaces is an assignment operator or double arrow, mark a warning
@@ -45,7 +44,7 @@ class DisallowAssignAlignSniff implements Sniff {
 		return isset(Tokens::ASSIGNMENT_TOKENS[$token['code']]);
 	}
 
-	private function fixTokens(File $phpcsFile, mixed $stackPtr): void {
+	private function fixTokens(File $phpcsFile, int $stackPtr): void {
 		$phpcsFile->fixer->beginChangeset();
 		$phpcsFile->fixer->replaceToken($stackPtr, ' ');
 		$phpcsFile->fixer->endChangeset();

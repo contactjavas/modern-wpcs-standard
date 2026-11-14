@@ -18,12 +18,11 @@ class DisallowCallUserFuncSniff implements Sniff {
 		return [T_STRING, T_NAME_FULLY_QUALIFIED];
 	}
 
-	public function process(File $phpcsFile, mixed $stackPtr): void {
-		$helper = new SniffHelpers();
-		$functionName = $helper->getGlobalFunctionCallName($phpcsFile, $stackPtr);
+	public function process(File $phpcsFile, int $stackPtr): void {
+		$functionName = SniffHelpers::getGlobalFunctionCallName($phpcsFile, $stackPtr);
 
 		if ( in_array($functionName, self::DISALLOWED_FUNCTIONS, true)
-			&& $helper->isFunctionCall($phpcsFile, $stackPtr)
+			&& SniffHelpers::isFunctionCall($phpcsFile, $stackPtr)
 		) {
 			$error = 'call_user_func and call_user_func_array are not allowed';
 			$phpcsFile->addError($error, $stackPtr, 'CallUserFunc');

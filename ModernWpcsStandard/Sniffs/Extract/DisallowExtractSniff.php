@@ -13,11 +13,9 @@ class DisallowExtractSniff implements Sniff {
 		return [T_STRING, T_NAME_FULLY_QUALIFIED];
 	}
 
-	public function process(File $phpcsFile, mixed $stackPtr): void {
-		$helper = new SniffHelpers();
-
-		if ( $helper->getGlobalFunctionCallName($phpcsFile, $stackPtr) === 'extract'
-			&& $helper->isFunctionCall($phpcsFile, $stackPtr)
+	public function process(File $phpcsFile, int $stackPtr): void {
+		if ( SniffHelpers::getGlobalFunctionCallName($phpcsFile, $stackPtr) === 'extract'
+			&& SniffHelpers::isFunctionCall($phpcsFile, $stackPtr)
 		) {
 			$error = 'Extract is not allowed';
 			$phpcsFile->addError($error, $stackPtr, 'Extract');
