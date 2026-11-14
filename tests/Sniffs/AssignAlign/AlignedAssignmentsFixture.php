@@ -22,3 +22,9 @@ $myAry     = [ 'x' ];
 $myAry2    = [ 'y' ];
 $myAry3 = [ 'x' ];
 // This comment    should be fine.
+
+// Next three lines should report
+$foo    .= 'bar';
+$foobar  += 1;
+$fo     ??= 'fo';
+$fo .= 'fine';

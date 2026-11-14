@@ -21,3 +21,14 @@ $myAry = [
 	 'two' => 'two',
 	 'three' => 'three',
 ];
+
+// Leading operators on their own indented line are fine.
+$myAry = [
+	'key'
+		=> 'value',
+	'other'
+		=> 'value',
+];
+
+$myVar
+	= 'value';

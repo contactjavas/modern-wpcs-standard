@@ -7,6 +7,7 @@ namespace ModernWpcsStandard\Sniffs\AssignAlign;
 use ModernWpcsStandard\SniffHelpers;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
 
 class DisallowAssignAlignSniff implements Sniff {
 	public function register(): array {
@@ -16,11 +17,17 @@ class DisallowAssignAlignSniff implements Sniff {
 	public function process(File $phpcsFile, mixed $stackPtr): void {
 		$tokens = $phpcsFile->getTokens();
 
-		// If the next non-whitespace after multiples spaces is an equal sign or double arrow, mark a warning
+		// If the next non-whitespace after multiple spaces is an assignment operator or double arrow, mark a warning
 		if ( strlen($tokens[$stackPtr]['content']) <= 1) {
 			return;
 		}
-		
+
+		// Line indentation (e.g. before a leading `=>` on its own line) and trailing
+		// whitespace before a newline are not alignment.
+		if ( $tokens[$stackPtr]['column'] === 1 || str_contains($tokens[$stackPtr]['content'], "\n")) {
+			return;
+		}
+
 		$nextNonWhitespacePtr = $phpcsFile->findNext(T_WHITESPACE, $stackPtr + 1, null, true, null, false);
 		
 		if ( $nextNonWhitespacePtr !== false && $this->isTokenAnAssignment($tokens[$nextNonWhitespacePtr])) {
@@ -34,12 +41,8 @@ class DisallowAssignAlignSniff implements Sniff {
 	}
 
 	private function isTokenAnAssignment(array $token): bool {
-		$assignOperators = [
-			T_EQUAL,
-			T_DOUBLE_ARROW,
-		];
-
-		return in_array($token['code'], $assignOperators, true);
+		// `=`, `=>` and compound assignments (`.=`, `+=`, `??=`, ...).
+		return isset(Tokens::ASSIGNMENT_TOKENS[$token['code']]);
 	}
 
 	private function fixTokens(File $phpcsFile, mixed $stackPtr): void {
