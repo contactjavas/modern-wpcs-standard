@@ -143,8 +143,9 @@ php vendor/bin/phpcbf --standard=ModernWpcsStandard/ruleset.xml --sniffs=ModernW
 
 ## Release & Downstream Impact
 
-- `modern-wpcs-ruleset` (sibling checkout at `../modern-wpcs-ruleset`) requires this package by tag (`contactjavas/modern-wpcs-standard ^2.0.0`). Fixes reach it only after a tagged release.
-- The PHP requirement is now `^8.4` (latest tag `v2.0.0` predates that), so the next release should be **3.0.0**. The ruleset must then bump its constraint and its own PHP requirement.
+- `modern-wpcs-ruleset` (sibling checkout at `../modern-wpcs-ruleset`) requires this package by tag (`contactjavas/modern-wpcs-standard ^3.0.0` as of ruleset v2.0.0). Fixes reach it only after a tagged release.
+- A major release here (e.g. a raised PHP or PHPCS minimum) needs a matching constraint bump and release in the ruleset.
+- The repo has an `upstream` remote (Automattic), and `gh` defaults to it. Always pass `--repo contactjavas/modern-wpcs-standard` to `gh`.
 - Renaming or removing a sniff or error code, or changing a fixer, can break the ruleset's `ruleset.xml` overrides or its CI fixtures. Check `../modern-wpcs-ruleset/ModernWpcsRuleset/ruleset.xml` when touching such things.
 - Do not create tags or releases unless the user asks. When asked, follow the `release` skill.
 
@@ -156,7 +157,7 @@ Task-specific workflows live in `.agents/skills/<name>/SKILL.md`. When a request
 
 | Skill | Path | Use when |
 | --- | --- | --- |
-| **release** | [`.agents/skills/release/SKILL.md`](.agents/skills/release/SKILL.md) | The user asks to release, tag or publish a version: verify, pick the semver bump, annotated `vX.Y.Z` tag, push. |
+| **release** | [`.agents/skills/release/SKILL.md`](.agents/skills/release/SKILL.md) | The user asks to release, tag or publish a version: verify, pick the semver bump, annotated `vX.Y.Z` tag, push, GitHub Release. |
 
 ---
 

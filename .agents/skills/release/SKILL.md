@@ -1,13 +1,16 @@
 ---
 name: release
-description: Cut a new version of contactjavas/modern-wpcs-standard by verifying, picking the semver bump, creating an annotated vX.Y.Z tag and pushing it to origin (Composer reads versions from tags). Use when the user says "release", "tag a release", "cut a version", "publish", or "tag and push".
+description: Cut a new version of contactjavas/modern-wpcs-standard by verifying, picking the semver bump, creating an annotated vX.Y.Z tag, pushing it to origin (Composer reads versions from tags), and publishing a GitHub Release. Use when the user says "release", "tag a release", "cut a version", "publish", or "tag and push".
 ---
 
-# Release (verify → pick version → tag → push)
+# Release (verify → pick version → tag → push → GitHub Release)
 
 There is no `version` field in `composer.json` and no deploy workflow. Consumers (including
 `../modern-wpcs-ruleset`) install this package from the GitHub VCS repository, so **pushing a
 `vX.Y.Z` tag to `origin` is the release**. A pushed tag is public and can't be taken back cleanly.
+
+**Always pass `--repo contactjavas/modern-wpcs-standard` to `gh`.** The clone has an `upstream` remote
+(Automattic), and `gh` resolves to it by default, so without `--repo` it reads or writes the wrong repository.
 
 ## Steps
 
@@ -26,8 +29,12 @@ There is no `version` field in `composer.json` and no deploy workflow. Consumers
    composer test
    composer lint
    ```
-   Also check CI on the commit you're tagging: `gh run list --branch master --limit 1`. It must be
-   `completed success` for `HEAD`. If it's running, say so and wait or ask. If it failed, stop.
+   Locally, `composer validate --strict` also fails on a stale local `composer.lock` (gitignored, absent in CI).
+   Add `--no-check-lock` if that's the only complaint.
+   Also check CI on the commit you're tagging (the Dependabot workflow also runs on `master`, so filter by workflow):
+   `gh run list --repo contactjavas/modern-wpcs-standard --workflow ci.yml --commit <HEAD sha> --limit 1`.
+   It must be `completed success`. If it's still running, wait with
+   `gh run watch <id> --repo contactjavas/modern-wpcs-standard --exit-status`. If it failed, stop.
 
 3. **Pick the version** (semver). Read `git diff <latest-tag>..HEAD -- composer.json ModernWpcsStandard/`:
    - **Major**: the minimum `php` or `squizlabs/php_codesniffer` requirement was raised, or a sniff, category or
@@ -35,8 +42,8 @@ There is no `version` field in `composer.json` and no deploy workflow. Consumers
      `modern-wpcs-ruleset/ModernWpcsRuleset/ruleset.xml`).
    - **Minor**: a new sniff, a new error code, or a new public sniff property.
    - **Patch**: bug fixes (false positives/negatives, fixer fixes), refactors, docs, CI.
-   - Decide patch/minor yourself. For a **major**, tell the user why and get confirmation before tagging.
-     (Pending at the time of writing: `php` went from `^8.2` to `^8.4` after `v2.0.0`, so the next release is `v3.0.0`.)
+   - Decide patch/minor yourself. For a **major**, tell the user why. Get confirmation before tagging, unless
+     the user already asked for this release and accepted whatever version makes sense.
 
 4. **Tag** the release commit with an **annotated** tag (repo convention since `v2.0.0`), leading `v`, three parts:
    ```powershell
@@ -59,12 +66,19 @@ There is no `version` field in `composer.json` and no deploy workflow. Consumers
    Don't use `--force`. If the branch push is rejected, `git pull --rebase origin master`, re-run step 2,
    then move the still-unpushed tag (`git tag -d vX.Y.Z` and re-create it) and push again.
 
-6. **Report**: the tag, its commit hash, the previous → new version, and the summary.
-   - Remind the user about downstream. `modern-wpcs-ruleset` requires `contactjavas/modern-wpcs-standard ^2.0.0`.
-     A **major** release needs a constraint bump there (see that repo's `release` skill and AGENTS.md
-     "Upstream Dependencies"). A minor or patch release reaches it with `composer update contactjavas/modern-wpcs-standard`.
-   - A GitHub Release page is optional (the latest one dates from 2021). Create one with
-     `gh release create vX.Y.Z --notes-from-tag` only if the user asks.
+6. **GitHub Release** (repo convention: every version has one). Write the notes to a file in the scratchpad,
+   in the format of earlier releases (`gh release view <prev-tag> --repo contactjavas/modern-wpcs-standard`):
+   `# Release vX.Y.Z`, a one-paragraph summary, then `## Breaking Changes` (if any), `## Fixes` / `## Added`,
+   `## Maintenance`, and `## Installation` with `composer require --dev contactjavas/modern-wpcs-standard:^X.Y.Z`.
+   For a major, say exactly what users must change in their `phpcs.xml`.
+   ```
+   gh release create vX.Y.Z --repo contactjavas/modern-wpcs-standard --verify-tag --title vX.Y.Z --latest --notes-file <file>
+   ```
+
+7. **Report**: the tag, its commit hash, the previous → new version, the release URL, and the summary.
+   - Remind the user about downstream. Look up the constraint in `../modern-wpcs-ruleset/composer.json`
+     (`contactjavas/modern-wpcs-standard`). A **major** release needs a constraint bump there (see that repo's
+     `release` skill). A minor or patch release reaches it with `composer update contactjavas/modern-wpcs-standard`.
 
 ## Don'ts
 
