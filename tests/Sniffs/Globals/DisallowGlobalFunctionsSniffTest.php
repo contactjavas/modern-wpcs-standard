@@ -29,4 +29,37 @@ class DisallowGlobalFunctionsSniffTest extends TestCase {
 		$lines = $helper->getErrorLineNumbersFromFile($phpcsFile);
 		$this->assertEquals([], $lines);
 	}
+
+	public function testDisallowGlobalFunctionsSniffFlagsConditionalGlobals() {
+		$fixtureFile = __DIR__ . '/ConditionalGlobalFunctionFixture.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Globals/DisallowGlobalFunctionsSniff.php';
+
+		$helper = new SniffTestHelper();
+		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
+		$phpcsFile->process();
+		$lines = $helper->getErrorLineNumbersFromFile($phpcsFile);
+		$this->assertEquals([7], $lines);
+	}
+
+	public function testDisallowGlobalFunctionsSniffAllowsConditionalNamespacedFunctions() {
+		$fixtureFile = __DIR__ . '/ConditionalNamespacedFunctionFixture.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Globals/DisallowGlobalFunctionsSniff.php';
+
+		$helper = new SniffTestHelper();
+		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
+		$phpcsFile->process();
+		$lines = $helper->getErrorLineNumbersFromFile($phpcsFile);
+		$this->assertEquals([], $lines);
+	}
+
+	public function testDisallowGlobalFunctionsSniffFlagsGlobalNamespaceBlock() {
+		$fixtureFile = __DIR__ . '/BracedNamespacesFixture.php';
+		$sniffFile = __DIR__ . '/../../../ModernWpcsStandard/Sniffs/Globals/DisallowGlobalFunctionsSniff.php';
+
+		$helper = new SniffTestHelper();
+		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
+		$phpcsFile->process();
+		$lines = $helper->getErrorLineNumbersFromFile($phpcsFile);
+		$this->assertEquals([17], $lines);
+	}
 }
