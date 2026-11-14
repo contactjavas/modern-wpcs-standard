@@ -5,3 +5,6 @@ phpunit.xml
 phpcs.xml
 .vscode
 .phpunit.result.cache
+
+.agents/tasks
+.agents/plans
