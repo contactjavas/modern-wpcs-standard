@@ -1,6 +1,6 @@
 # Modern WPCS Standard ![CI](https://github.com/contactjavas/modern-wpcs-standard/actions/workflows/ci.yml/badge.svg)
 
-These are a set of modern (PHP >= 8.2) linting guidelines for WordPress development. Because of the newer PHP version, it is not suitable for work on Core WordPress, but may be useful for those who are not bound by legacy PHP versions.
+These are a set of modern (PHP >= 8.4) linting guidelines for WordPress development. Because of the newer PHP version, it is not suitable for work on Core WordPress, but may be useful for those who are not bound by legacy PHP versions.
 
 These guidelines are being developed primarily for [contactjavas](https://github.com/contactjavas), but anyone is free to use them, suggest changes, or report bugs.
 
