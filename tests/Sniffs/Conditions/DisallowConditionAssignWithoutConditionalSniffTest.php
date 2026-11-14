@@ -15,6 +15,6 @@ class DisallowConditionAssignWithoutConditionalSniffTest extends TestCase {
 		$phpcsFile = $helper->prepareLocalFileForSniffs($sniffFile, $fixtureFile);
 		$phpcsFile->process();
 		$lines = $helper->getErrorLineNumbersFromFile($phpcsFile);
-		$this->assertEquals([10, 15], $lines);
+		$this->assertEquals([10, 15, 70, 75, 82, 93], $lines);
 	}
 }
